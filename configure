@@ -655,12 +655,16 @@ DEFAULT_TERM
 NEED_FORKPTY_FALSE
 NEED_FORKPTY_TRUE
 XOPEN_DEFINES
+ENABLE_SIXEL_FALSE
+ENABLE_SIXEL_TRUE
 HAVE_SYSTEMD_FALSE
 HAVE_SYSTEMD_TRUE
 SYSTEMD_LIBS
 SYSTEMD_CFLAGS
 HAVE_UTF8PROC_FALSE
 HAVE_UTF8PROC_TRUE
+LIBUTF8PROC_LIBS
+LIBUTF8PROC_CFLAGS
 LIBNCURSESW_LIBS
 LIBNCURSESW_CFLAGS
 LIBNCURSES_LIBS
@@ -793,6 +797,7 @@ enable_utempter
 enable_utf8proc
 enable_systemd
 enable_cgroups
+enable_sixel
 '
       ac_precious_vars='build_alias
 host_alias
@@ -819,6 +824,8 @@ LIBNCURSES_CFLAGS
 LIBNCURSES_LIBS
 LIBNCURSESW_CFLAGS
 LIBNCURSESW_LIBS
+LIBUTF8PROC_CFLAGS
+LIBUTF8PROC_LIBS
 SYSTEMD_CFLAGS
 SYSTEMD_LIBS'
 
@@ -1458,6 +1465,8 @@ Optional Features:
 
   --disable-cgroups       disable adding panes to new cgroups with systemd
 
+  --enable-sixel          enable sixel images
+
 
 Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
@@ -1506,6 +1515,10 @@ Some influential environment variables:
               C compiler flags for LIBNCURSESW, overriding pkg-config
   LIBNCURSESW_LIBS
               linker flags for LIBNCURSESW, overriding pkg-config
+  LIBUTF8PROC_CFLAGS
+              C compiler flags for LIBUTF8PROC, overriding pkg-config
+  LIBUTF8PROC_LIBS
+              linker flags for LIBUTF8PROC, overriding pkg-config
   SYSTEMD_CFLAGS
               C compiler flags for SYSTEMD, overriding pkg-config
   SYSTEMD_LIBS
@@ -6280,7 +6293,7 @@ return setupterm ();
   return 0;
 }
 _ACEOF
-for ac_lib in '' tinfo ncurses ncursesw; do
+for ac_lib in '' tinfo terminfo ncurses ncursesw; do
   if test -z "$ac_lib"; then
     ac_res="none required"
   else
@@ -6500,6 +6513,102 @@ if test "${enable_utf8proc+set}" = set; then :
 fi
 
 if test "x$enable_utf8proc" = xyes; then
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for LIBUTF8PROC" >&5
+$as_echo_n "checking for LIBUTF8PROC... " >&6; }
+
+if test -n "$LIBUTF8PROC_CFLAGS"; then
+    pkg_cv_LIBUTF8PROC_CFLAGS="$LIBUTF8PROC_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libutf8proc\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libutf8proc") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_LIBUTF8PROC_CFLAGS=`$PKG_CONFIG --cflags "libutf8proc" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$LIBUTF8PROC_LIBS"; then
+    pkg_cv_LIBUTF8PROC_LIBS="$LIBUTF8PROC_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libutf8proc\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libutf8proc") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_LIBUTF8PROC_LIBS=`$PKG_CONFIG --libs "libutf8proc" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        LIBUTF8PROC_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libutf8proc" 2>&1`
+        else
+	        LIBUTF8PROC_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libutf8proc" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$LIBUTF8PROC_PKG_ERRORS" >&5
+
+	as_fn_error $? "Package requirements (libutf8proc) were not met:
+
+$LIBUTF8PROC_PKG_ERRORS
+
+Consider adjusting the PKG_CONFIG_PATH environment variable if you
+installed software in a non-standard prefix.
+
+Alternatively, you may set the environment variables LIBUTF8PROC_CFLAGS
+and LIBUTF8PROC_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details." "$LINENO" 5
+elif test $pkg_failed = untried; then
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	{ { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
+$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
+as_fn_error $? "The pkg-config script could not be found or is too old.  Make sure it
+is in your PATH or set the PKG_CONFIG environment variable to the full
+path to pkg-config.
+
+Alternatively, you may set the environment variables LIBUTF8PROC_CFLAGS
+and LIBUTF8PROC_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+
+To get pkg-config, see <http://pkg-config.freedesktop.org/>.
+See \`config.log' for more details" "$LINENO" 5; }
+else
+	LIBUTF8PROC_CFLAGS=$pkg_cv_LIBUTF8PROC_CFLAGS
+	LIBUTF8PROC_LIBS=$pkg_cv_LIBUTF8PROC_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+			AM_CPPFLAGS="$LIBUTF8PROC_CFLAGS $AM_CPPFLAGS"
+			CPPFLAGS="$LIBUTF8PROC_CFLAGS $SAVED_CPPFLAGS"
+			LIBS="$LIBUTF8PROC_LIBS $LIBS"
+
+
+fi
 	ac_fn_c_check_header_mongrel "$LINENO" "utf8proc.h" "ac_cv_header_utf8proc_h" "$ac_includes_default"
 if test "x$ac_cv_header_utf8proc_h" = xyes; then :
   enable_utf8proc=yes
@@ -6703,10 +6812,29 @@ if test "x$enable_cgroups" = xyes; then
 	fi
 fi
 
+# Enable sixel support.
+# Check whether --enable-sixel was given.
+if test "${enable_sixel+set}" = set; then :
+  enableval=$enable_sixel;
+fi
+
+if test "x$enable_sixel" = xyes; then
+	$as_echo "#define ENABLE_SIXEL 1" >>confdefs.h
+
+fi
+ if test "x$enable_sixel" = xyes; then
+  ENABLE_SIXEL_TRUE=
+  ENABLE_SIXEL_FALSE='#'
+else
+  ENABLE_SIXEL_TRUE='#'
+  ENABLE_SIXEL_FALSE=
+fi
+
+
 # Check for b64_ntop. If we have b64_ntop, we assume b64_pton as well.
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for b64_ntop" >&5
 $as_echo_n "checking for b64_ntop... " >&6; }
-	cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
 		#include <sys/types.h>
@@ -8215,6 +8343,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_SYSTEMD_TRUE}" && test -z "${HAVE_SYSTEMD_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_SYSTEMD\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${ENABLE_SIXEL_TRUE}" && test -z "${ENABLE_SIXEL_FALSE}"; then
+  as_fn_error $? "conditional \"ENABLE_SIXEL\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${NEED_FORKPTY_TRUE}" && test -z "${NEED_FORKPTY_FALSE}"; then
