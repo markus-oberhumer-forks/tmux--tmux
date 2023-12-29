@@ -14,8 +14,6 @@
 
 @SET_MAKE@
 
-# Makefile.am
-
 VPATH = @srcdir@
 am__is_gnu_make = { \
   if test -z '$(MAKELEVEL)'; then \
@@ -189,9 +187,9 @@ am__dist_tmux_SOURCES_DIST = alerts.c arguments.c attributes.c cfg.c \
 	screen.c server-acl.c server-client.c server-fn.c server.c \
 	session.c spawn.c status.c style.c tmux.c tmux.h \
 	tmux-protocol.h tty-acs.c tty-features.c tty-keys.c tty-term.c \
-	tty.c utf8.c window-buffer.c window-client.c window-clock.c \
-	window-copy.c window-customize.c window-tree.c window.c \
-	xmalloc.c xmalloc.h image.c image-sixel.c
+	tty.c utf8-combined.c utf8.c window-buffer.c window-client.c \
+	window-clock.c window-copy.c window-customize.c window-tree.c \
+	window.c xmalloc.c xmalloc.h image.c image-sixel.c
 @ENABLE_SIXEL_TRUE@am__objects_1 = image.$(OBJEXT) \
 @ENABLE_SIXEL_TRUE@	image-sixel.$(OBJEXT)
 dist_tmux_OBJECTS = alerts.$(OBJEXT) arguments.$(OBJEXT) \
@@ -245,10 +243,11 @@ dist_tmux_OBJECTS = alerts.$(OBJEXT) arguments.$(OBJEXT) \
 	spawn.$(OBJEXT) status.$(OBJEXT) style.$(OBJEXT) \
 	tmux.$(OBJEXT) tty-acs.$(OBJEXT) tty-features.$(OBJEXT) \
 	tty-keys.$(OBJEXT) tty-term.$(OBJEXT) tty.$(OBJEXT) \
-	utf8.$(OBJEXT) window-buffer.$(OBJEXT) window-client.$(OBJEXT) \
-	window-clock.$(OBJEXT) window-copy.$(OBJEXT) \
-	window-customize.$(OBJEXT) window-tree.$(OBJEXT) \
-	window.$(OBJEXT) xmalloc.$(OBJEXT) $(am__objects_1)
+	utf8-combined.$(OBJEXT) utf8.$(OBJEXT) window-buffer.$(OBJEXT) \
+	window-client.$(OBJEXT) window-clock.$(OBJEXT) \
+	window-copy.$(OBJEXT) window-customize.$(OBJEXT) \
+	window-tree.$(OBJEXT) window.$(OBJEXT) xmalloc.$(OBJEXT) \
+	$(am__objects_1)
 @NEED_FORKPTY_TRUE@am__objects_2 =  \
 @NEED_FORKPTY_TRUE@	compat/forkpty-@PLATFORM@.$(OBJEXT)
 @HAVE_SYSTEMD_TRUE@am__objects_3 = compat/systemd.$(OBJEXT)
@@ -551,9 +550,9 @@ dist_tmux_SOURCES = alerts.c arguments.c attributes.c cfg.c client.c \
 	screen.c server-acl.c server-client.c server-fn.c server.c \
 	session.c spawn.c status.c style.c tmux.c tmux.h \
 	tmux-protocol.h tty-acs.c tty-features.c tty-keys.c tty-term.c \
-	tty.c utf8.c window-buffer.c window-client.c window-clock.c \
-	window-copy.c window-customize.c window-tree.c window.c \
-	xmalloc.c xmalloc.h $(am__append_15)
+	tty.c utf8-combined.c utf8.c window-buffer.c window-client.c \
+	window-clock.c window-copy.c window-customize.c window-tree.c \
+	window.c xmalloc.c xmalloc.h $(am__append_15)
 nodist_tmux_SOURCES = osdep-@PLATFORM@.c $(am__append_12) \
 	$(am__append_13) $(am__append_14)
 @NEED_FUZZING_TRUE@fuzz_input_fuzzer_LDFLAGS = $(FUZZING_LIBS)
@@ -798,6 +797,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tty-keys.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tty-term.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tty.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utf8-combined.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utf8.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/window-buffer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/window-client.Po@am__quote@
