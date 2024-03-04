@@ -338,8 +338,9 @@ am__DIST_COMMON = $(srcdir)/Makefile.in \
 	$(top_srcdir)/compat/getline.c $(top_srcdir)/compat/getopt.c \
 	$(top_srcdir)/compat/getpeereid.c \
 	$(top_srcdir)/compat/getprogname.c \
+	$(top_srcdir)/compat/htonll.c \
 	$(top_srcdir)/compat/imsg-buffer.c $(top_srcdir)/compat/imsg.c \
-	$(top_srcdir)/compat/memmem.c \
+	$(top_srcdir)/compat/memmem.c $(top_srcdir)/compat/ntohll.c \
 	$(top_srcdir)/compat/reallocarray.c \
 	$(top_srcdir)/compat/recallocarray.c \
 	$(top_srcdir)/compat/setenv.c \
@@ -826,9 +827,11 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@compat/$(DEPDIR)/getopt.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@compat/$(DEPDIR)/getpeereid.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@compat/$(DEPDIR)/getprogname.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@compat/$(DEPDIR)/htonll.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@compat/$(DEPDIR)/imsg-buffer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@compat/$(DEPDIR)/imsg.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@compat/$(DEPDIR)/memmem.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@compat/$(DEPDIR)/ntohll.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@compat/$(DEPDIR)/reallocarray.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@compat/$(DEPDIR)/recallocarray.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@compat/$(DEPDIR)/setenv.Po@am__quote@
